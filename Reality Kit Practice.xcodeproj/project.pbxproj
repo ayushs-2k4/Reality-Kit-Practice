@@ -14,6 +14,7 @@
 		0775871D2BF282C400FB0A31 /* Reality_Kit_PracticeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0775871C2BF282C400FB0A31 /* Reality_Kit_PracticeTests.swift */; };
 		077587272BF282C400FB0A31 /* Reality_Kit_PracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077587262BF282C400FB0A31 /* Reality_Kit_PracticeUITests.swift */; };
 		077587292BF282C400FB0A31 /* Reality_Kit_PracticeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077587282BF282C400FB0A31 /* Reality_Kit_PracticeUITestsLaunchTests.swift */; };
+		077587362BF284D900FB0A31 /* aerodynamics_workshop.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 077587352BF284D900FB0A31 /* aerodynamics_workshop.skybox */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		077587222BF282C400FB0A31 /* Reality Kit PracticeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Reality Kit PracticeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		077587262BF282C400FB0A31 /* Reality_Kit_PracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reality_Kit_PracticeUITests.swift; sourceTree = "<group>"; };
 		077587282BF282C400FB0A31 /* Reality_Kit_PracticeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reality_Kit_PracticeUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		077587352BF284D900FB0A31 /* aerodynamics_workshop.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; name = aerodynamics_workshop.skybox; path = "Reality Kit Practice/aerodynamics_workshop.skybox"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				0775870C2BF282C300FB0A31 /* ContentView.swift */,
 				0775870E2BF282C400FB0A31 /* Assets.xcassets */,
 				077587102BF282C400FB0A31 /* Reality_Kit_Practice.entitlements */,
+				077587352BF284D900FB0A31 /* aerodynamics_workshop.skybox */,
 				077587112BF282C400FB0A31 /* Preview Content */,
 			);
 			path = "Reality Kit Practice";
@@ -233,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				077587362BF284D900FB0A31 /* aerodynamics_workshop.skybox in Resources */,
 				077587132BF282C400FB0A31 /* Preview Assets.xcassets in Resources */,
 				0775870F2BF282C400FB0A31 /* Assets.xcassets in Resources */,
 			);
