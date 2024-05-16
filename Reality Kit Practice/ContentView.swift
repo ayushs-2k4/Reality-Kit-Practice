@@ -33,8 +33,12 @@ class GameViewController: NSViewController {
     var cameraRotationSpeedSlider: NSSlider!
     var cameraRotationSpeedSliderLabel: NSTextField!
 
-    var cameraDistance: Float = 10
-    var cameraRotationSpeed: Float = 0.001
+    var cameraDistance: Float = 40
+//    var cameraRotationSpeed: Float = 0.001
+    var cameraRotationSpeed: Float = 0
+    var degreesToRotate: (Float, Float) = (0, 0)
+
+    let sphereAnchor = AnchorEntity(world: .zero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +53,14 @@ class GameViewController: NSViewController {
             arView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
 
+        let tapGestureRecognizer = NSClickGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        arView.addGestureRecognizer(tapGestureRecognizer)
+
+        let panGestureRecognizer = NSPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        arView.addGestureRecognizer(panGestureRecognizer)
+
         // Add Camera Distance Slider
-        cameraDistanceSlider = NSSlider(value: 10, minValue: 1, maxValue: 20, target: self, action: #selector(cameraDistanceChanged(_:)))
+        cameraDistanceSlider = NSSlider(value: Double(self.cameraDistance), minValue: 1, maxValue: 100, target: self, action: #selector(cameraDistanceChanged(_:)))
         cameraDistanceSlider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(cameraDistanceSlider)
         NSLayoutConstraint.activate([
@@ -71,7 +81,7 @@ class GameViewController: NSViewController {
         ])
 
         // Add Camera Rotation Speed Slider
-        cameraRotationSpeedSlider = NSSlider(value: 0.01, minValue: 0, maxValue: 1, target: self, action: #selector(cameraRotationSpeedChanged(_:)))
+        cameraRotationSpeedSlider = NSSlider(value: 0.01, minValue: -1, maxValue: 1, target: self, action: #selector(cameraRotationSpeedChanged(_:)))
         cameraRotationSpeedSlider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(cameraRotationSpeedSlider)
         NSLayoutConstraint.activate([
@@ -79,7 +89,7 @@ class GameViewController: NSViewController {
             cameraRotationSpeedSlider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             cameraRotationSpeedSlider.bottomAnchor.constraint(equalTo: cameraDistanceSlider.bottomAnchor, constant: -50)
         ])
-        
+
         // Add Camera Rotation Speed Label
         cameraRotationSpeedSliderLabel = NSTextField(labelWithString: "Camera Rot. Speed: \(cameraRotationSpeedSlider.floatValue)")
         cameraRotationSpeedSliderLabel.textColor = .white
@@ -100,10 +110,18 @@ class GameViewController: NSViewController {
         sphereMaterial.metallic = MaterialScalarParameter(floatLiteral: 1)
         sphereMaterial.roughness = MaterialScalarParameter(floatLiteral: 0)
 
-        let sphereEntity = ModelEntity(mesh: .generateSphere(radius: 1), materials: [sphereMaterial])
-        let sphereAnchor = AnchorEntity(world: .zero)
+        let sphereEntity = ModelEntity(mesh: .generateBox(size: 10, cornerRadius: 2), materials: [sphereMaterial])
+
         sphereAnchor.addChild(sphereEntity)
         arView.scene.anchors.append(sphereAnchor)
+//        // Convert degrees to radians
+//        let radiansToRotate = degreesToRotate * .pi / 180
+//
+//        // Create rotation transform
+//        let rotation = simd_quatf(angle: radiansToRotate, axis: SIMD3<Float>(0, 1, 0))
+//
+//        // Apply rotation transform to the anchor entity
+//        sphereAnchor.transform.rotation = rotation
 
         let camera = PerspectiveCamera()
         camera.camera.fieldOfViewInDegrees = 60
@@ -140,6 +158,34 @@ class GameViewController: NSViewController {
     @objc func cameraRotationSpeedChanged(_ sender: NSSlider) {
         self.cameraRotationSpeed = sender.floatValue
         self.cameraRotationSpeedSliderLabel.stringValue = "Camera Rot. Speed: \(sender.floatValue)"
+    }
+
+    @objc func handleTap(_ sender: NSClickGestureRecognizer) {
+        print("Clciked")
+    }
+
+    @objc func handlePan(_ sender: NSPanGestureRecognizer) {
+        print("Panned")
+        print("velocity: \(sender.velocity(in: nil))")
+        print("translation: \(sender.translation(in: nil))")
+        print()
+        
+        self.degreesToRotate.0 += Float(sender.translation(in: nil).x)
+        self.degreesToRotate.1 += Float(sender.translation(in: nil).y)
+
+        // Convert degrees to radians
+        let radiansToRotateX = self.degreesToRotate.0 * .pi / 180 * 0.01
+        let radiansToRotateY = self.degreesToRotate.1 * .pi / 180 * 0.01
+
+        // Create rotation transforms for X and Y axes
+        let rotationX = simd_quatf(angle: radiansToRotateX, axis: SIMD3<Float>(0, 1, 0)) // Rotate around X-axis
+        let rotationY = simd_quatf(angle: radiansToRotateY, axis: SIMD3<Float>(1, 0, 0)) // Rotate around Y-axis
+
+        // Combine the rotations
+        let combinedRotation = rotationX * rotationY
+
+        // Apply combined rotation transform to the sphere anchor entity
+        sphereAnchor.transform.rotation = combinedRotation
     }
 }
 
