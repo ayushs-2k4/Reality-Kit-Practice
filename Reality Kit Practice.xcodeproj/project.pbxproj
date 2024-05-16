@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0728B3ED2BF663DB00F59208 /* sneaker_airforce.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 0728B3EC2BF663DB00F59208 /* sneaker_airforce.usdz */; };
 		0775870B2BF282C300FB0A31 /* Reality_Kit_PracticeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0775870A2BF282C300FB0A31 /* Reality_Kit_PracticeApp.swift */; };
 		0775870D2BF282C300FB0A31 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0775870C2BF282C300FB0A31 /* ContentView.swift */; };
 		0775870F2BF282C400FB0A31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0775870E2BF282C400FB0A31 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0728B3EC2BF663DB00F59208 /* sneaker_airforce.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = sneaker_airforce.usdz; sourceTree = "<group>"; };
 		077587072BF282C300FB0A31 /* Reality Kit Practice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Reality Kit Practice.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0775870A2BF282C300FB0A31 /* Reality_Kit_PracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reality_Kit_PracticeApp.swift; sourceTree = "<group>"; };
 		0775870C2BF282C300FB0A31 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		077587092BF282C300FB0A31 /* Reality Kit Practice */ = {
 			isa = PBXGroup;
 			children = (
+				0728B3EC2BF663DB00F59208 /* sneaker_airforce.usdz */,
 				0775870A2BF282C300FB0A31 /* Reality_Kit_PracticeApp.swift */,
 				0775870C2BF282C300FB0A31 /* ContentView.swift */,
 				0775870E2BF282C400FB0A31 /* Assets.xcassets */,
@@ -240,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				07B1034B2BF62B7C00E0C8D4 /* metro_noord.skybox in Resources */,
+				0728B3ED2BF663DB00F59208 /* sneaker_airforce.usdz in Resources */,
 				077587362BF284D900FB0A31 /* aerodynamics_workshop.skybox in Resources */,
 				077587132BF282C400FB0A31 /* Preview Assets.xcassets in Resources */,
 				0775870F2BF282C400FB0A31 /* Assets.xcassets in Resources */,

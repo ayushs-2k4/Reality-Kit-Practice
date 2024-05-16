@@ -33,12 +33,13 @@ class GameViewController: NSViewController {
     var cameraRotationSpeedSlider: NSSlider!
     var cameraRotationSpeedSliderLabel: NSTextField!
 
-    var cameraDistance: Float = 40
-//    var cameraRotationSpeed: Float = 0.001
-    var cameraRotationSpeed: Float = 0
+    var cameraDistance: Float = 100
+    var cameraRotationSpeed: Float = 0.001
+//    var cameraRotationSpeed: Float = 0
     var degreesToRotate: (Float, Float) = (0, 0)
 
     let sphereAnchor = AnchorEntity(world: .zero)
+    let sneakerEntity = try! Entity.load(named: "sneaker_airforce.usdz")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +61,7 @@ class GameViewController: NSViewController {
         arView.addGestureRecognizer(panGestureRecognizer)
 
         // Add Camera Distance Slider
-        cameraDistanceSlider = NSSlider(value: Double(self.cameraDistance), minValue: 1, maxValue: 100, target: self, action: #selector(cameraDistanceChanged(_:)))
+        cameraDistanceSlider = NSSlider(value: Double(self.cameraDistance), minValue: 1, maxValue: 1000, target: self, action: #selector(cameraDistanceChanged(_:)))
         cameraDistanceSlider.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(cameraDistanceSlider)
         NSLayoutConstraint.activate([
@@ -122,15 +123,14 @@ class GameViewController: NSViewController {
             let sphereEntity = ModelEntity(mesh: mesh, materials: [sphereMaterial])
 
             sphereAnchor.addChild(sphereEntity)
+
+            sneakerEntity.transform.scale = .init(1, 1, 1)
+            sneakerEntity.transform.translation = .init(10, 10, 10)
+            sphereAnchor.addChild(sneakerEntity)
+            
+            sneakerEntity.transform.rotation = .init(angle: Float(Angle(degrees: 90).radians), axis: SIMD3(0, 0, 1))
+
             arView.scene.anchors.append(sphereAnchor)
-//        // Convert degrees to radians
-//        let radiansToRotate = degreesToRotate * .pi / 180
-//
-//        // Create rotation transform
-//        let rotation = simd_quatf(angle: radiansToRotate, axis: SIMD3<Float>(0, 1, 0))
-//
-//        // Apply rotation transform to the anchor entity
-//        sphereAnchor.transform.rotation = rotation
 
             let camera = PerspectiveCamera()
             camera.camera.fieldOfViewInDegrees = 60
