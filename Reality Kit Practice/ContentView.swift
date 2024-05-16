@@ -107,18 +107,15 @@ class GameViewController: NSViewController {
         arView.environment.background = .skybox(skyboxResource)
 
         do {
-//            let texture = try TextureResource.load(named: "8k_moon")
-            
-            let cgImage = NSImage(resource: ._8KMars).cgImage(forProposedRect: nil, context: nil, hints: nil)!
+            let cgImage = NSImage(resource: ._8KMoon).cgImage(forProposedRect: nil, context: nil, hints: nil)!
             
             let texture = try TextureResource.generate(from: cgImage, options: .init(semantic: .normal))
             print("texture: \(texture)")
 
             var sphereMaterial = SimpleMaterial()
-//            sphereMaterial.baseColor = MaterialColorParameter.texture(texture)
             sphereMaterial.color = .init(texture: .init(texture))
-            sphereMaterial.metallic = MaterialScalarParameter(floatLiteral: 0)
-            sphereMaterial.roughness = MaterialScalarParameter(floatLiteral: 1)
+            sphereMaterial.metallic = MaterialScalarParameter(floatLiteral: 0.2)
+            sphereMaterial.roughness = MaterialScalarParameter(floatLiteral: 0.5)
 
             let mesh = MeshResource.generateSphere(radius: 10)
 
