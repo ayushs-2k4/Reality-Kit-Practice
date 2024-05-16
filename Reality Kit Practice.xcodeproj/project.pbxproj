@@ -15,6 +15,7 @@
 		077587272BF282C400FB0A31 /* Reality_Kit_PracticeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077587262BF282C400FB0A31 /* Reality_Kit_PracticeUITests.swift */; };
 		077587292BF282C400FB0A31 /* Reality_Kit_PracticeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 077587282BF282C400FB0A31 /* Reality_Kit_PracticeUITestsLaunchTests.swift */; };
 		077587362BF284D900FB0A31 /* aerodynamics_workshop.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 077587352BF284D900FB0A31 /* aerodynamics_workshop.skybox */; };
+		07B1034B2BF62B7C00E0C8D4 /* metro_noord.skybox in Resources */ = {isa = PBXBuildFile; fileRef = 07B1034A2BF62B7C00E0C8D4 /* metro_noord.skybox */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		077587262BF282C400FB0A31 /* Reality_Kit_PracticeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reality_Kit_PracticeUITests.swift; sourceTree = "<group>"; };
 		077587282BF282C400FB0A31 /* Reality_Kit_PracticeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reality_Kit_PracticeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		077587352BF284D900FB0A31 /* aerodynamics_workshop.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; name = aerodynamics_workshop.skybox; path = "Reality Kit Practice/aerodynamics_workshop.skybox"; sourceTree = SOURCE_ROOT; };
+		07B1034A2BF62B7C00E0C8D4 /* metro_noord.skybox */ = {isa = PBXFileReference; lastKnownFileType = file.skybox; path = metro_noord.skybox; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				0775870C2BF282C300FB0A31 /* ContentView.swift */,
 				0775870E2BF282C400FB0A31 /* Assets.xcassets */,
 				077587102BF282C400FB0A31 /* Reality_Kit_Practice.entitlements */,
+				07B1034A2BF62B7C00E0C8D4 /* metro_noord.skybox */,
 				077587352BF284D900FB0A31 /* aerodynamics_workshop.skybox */,
 				077587112BF282C400FB0A31 /* Preview Content */,
 			);
@@ -236,6 +239,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07B1034B2BF62B7C00E0C8D4 /* metro_noord.skybox in Resources */,
 				077587362BF284D900FB0A31 /* aerodynamics_workshop.skybox in Resources */,
 				077587132BF282C400FB0A31 /* Preview Assets.xcassets in Resources */,
 				0775870F2BF282C400FB0A31 /* Assets.xcassets in Resources */,

@@ -101,21 +101,21 @@ class GameViewController: NSViewController {
             cameraRotationSpeedSliderLabel.bottomAnchor.constraint(equalTo: cameraRotationSpeedSlider.topAnchor, constant: -10)
         ])
 
-        let skyboxName = "aerodynamics_workshop_4k"
+        let skyboxName = "metro_noord_4k"
         let skyboxResource = try! EnvironmentResource.load(named: skyboxName)
         arView.environment.lighting.resource = skyboxResource
         arView.environment.background = .skybox(skyboxResource)
 
         do {
             let cgImage = NSImage(resource: ._8KMoon).cgImage(forProposedRect: nil, context: nil, hints: nil)!
-            
+
             let texture = try TextureResource.generate(from: cgImage, options: .init(semantic: .normal))
             print("texture: \(texture)")
 
             var sphereMaterial = SimpleMaterial()
             sphereMaterial.color = .init(texture: .init(texture))
-            sphereMaterial.metallic = MaterialScalarParameter(floatLiteral: 0.2)
-            sphereMaterial.roughness = MaterialScalarParameter(floatLiteral: 0.5)
+            sphereMaterial.metallic = MaterialScalarParameter(floatLiteral: 1)
+            sphereMaterial.roughness = MaterialScalarParameter(floatLiteral: 0)
 
             let mesh = MeshResource.generateSphere(radius: 10)
 
