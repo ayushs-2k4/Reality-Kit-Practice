@@ -106,14 +106,26 @@ class GameViewController: NSViewController {
         arView.environment.lighting.resource = skyboxResource
         arView.environment.background = .skybox(skyboxResource)
 
-        var sphereMaterial = SimpleMaterial()
-        sphereMaterial.metallic = MaterialScalarParameter(floatLiteral: 1)
-        sphereMaterial.roughness = MaterialScalarParameter(floatLiteral: 0)
+        do {
+//            let texture = try TextureResource.load(named: "8k_moon")
+            
+            let cgImage = NSImage(resource: ._8KMars).cgImage(forProposedRect: nil, context: nil, hints: nil)!
+            
+            let texture = try TextureResource.generate(from: cgImage, options: .init(semantic: .normal))
+            print("texture: \(texture)")
 
-        let sphereEntity = ModelEntity(mesh: .generateBox(size: 10, cornerRadius: 2), materials: [sphereMaterial])
+            var sphereMaterial = SimpleMaterial()
+//            sphereMaterial.baseColor = MaterialColorParameter.texture(texture)
+            sphereMaterial.color = .init(texture: .init(texture))
+            sphereMaterial.metallic = MaterialScalarParameter(floatLiteral: 0)
+            sphereMaterial.roughness = MaterialScalarParameter(floatLiteral: 1)
 
-        sphereAnchor.addChild(sphereEntity)
-        arView.scene.anchors.append(sphereAnchor)
+            let mesh = MeshResource.generateSphere(radius: 10)
+
+            let sphereEntity = ModelEntity(mesh: mesh, materials: [sphereMaterial])
+
+            sphereAnchor.addChild(sphereEntity)
+            arView.scene.anchors.append(sphereAnchor)
 //        // Convert degrees to radians
 //        let radiansToRotate = degreesToRotate * .pi / 180
 //
@@ -123,29 +135,32 @@ class GameViewController: NSViewController {
 //        // Apply rotation transform to the anchor entity
 //        sphereAnchor.transform.rotation = rotation
 
-        let camera = PerspectiveCamera()
-        camera.camera.fieldOfViewInDegrees = 60
+            let camera = PerspectiveCamera()
+            camera.camera.fieldOfViewInDegrees = 60
 
-        let cameraAnchor = AnchorEntity(world: .zero)
-        cameraAnchor.addChild(camera)
+            let cameraAnchor = AnchorEntity(world: .zero)
+            cameraAnchor.addChild(camera)
 
-        arView.scene.addAnchor(cameraAnchor)
+            arView.scene.addAnchor(cameraAnchor)
 
-        var currentCameraRotation: Float = 0
+            var currentCameraRotation: Float = 0
 
-        sceneEventsUpdateSubscription = arView.scene.subscribe(to: SceneEvents.Update.self) { _ in
-            let x = sin(currentCameraRotation) * self.cameraDistance
-            let z = cos(currentCameraRotation) * self.cameraDistance
+            sceneEventsUpdateSubscription = arView.scene.subscribe(to: SceneEvents.Update.self) { _ in
+                let x = sin(currentCameraRotation) * self.cameraDistance
+                let z = cos(currentCameraRotation) * self.cameraDistance
 
-            let cameraTranslation = SIMD3<Float>(x, 0, z)
-            let cameraTransform = Transform(scale: .one,
-                                            rotation: simd_quatf(),
-                                            translation: cameraTranslation)
+                let cameraTranslation = SIMD3<Float>(x, 0, z)
+                let cameraTransform = Transform(scale: .one,
+                                                rotation: simd_quatf(),
+                                                translation: cameraTranslation)
 
-            camera.transform = cameraTransform
-            camera.look(at: .zero, from: cameraTranslation, relativeTo: nil)
+                camera.transform = cameraTransform
+                camera.look(at: .zero, from: cameraTranslation, relativeTo: nil)
 
-            currentCameraRotation += self.cameraRotationSpeed
+                currentCameraRotation += self.cameraRotationSpeed
+            }
+        } catch {
+            print("Error: \(error)")
         }
     }
 
@@ -169,7 +184,7 @@ class GameViewController: NSViewController {
         print("velocity: \(sender.velocity(in: nil))")
         print("translation: \(sender.translation(in: nil))")
         print()
-        
+
         self.degreesToRotate.0 += Float(sender.translation(in: nil).x)
         self.degreesToRotate.1 += Float(sender.translation(in: nil).y)
 
